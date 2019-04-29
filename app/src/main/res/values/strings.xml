@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Nothing</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about">About</string>
+
+    <string name="cd_navdrawer_image">Navigation Drawer Image</string>
+    <string name="cd_navdrawer_user_picture">User Profile Image</string>
+
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="toast_saved">Wallpapaer saved to #</string>
+    <string name="toast_saved_failed">Sorry! Failed to save wallpaper</string>
+    <string name="toast_wallpaper_set">Wallpapaer updated!</string>
+    <string name="toast_wallpaper_set_failed">Sorry! Unable to set wallpapaer</string>
+    <string name="splash_error">Unable to download wallpapers. Verify your google\'s user name in settings or device doesn\'t have internet connection!</string>
+    <string name="set_wallpaper">Set Wallpaper</string>
+    <string name="download_wallpaper">Download</string>
+    <string name="msg_unknown_error">Sorry! Unknown error occurred.</string>
+    <string name="msg_wall_fetch_error">Sorry! Unable to fetch wallpaper(s). Verify app settings or device doesn\'t have internet connection.</string>
+    <string name="toast_enter_google_username">Please enter google username</string>
+    <string name="toast_enter_valid_grid_columns">Please enter valid number of columns</string>
+    <string name="toast_enter_gallery_name">Please enter gallery directory name</string>
+    <string name="lbl_google_username">Google username</string>
+    <string name="lbl_no_grid_columns">Number of grid columns</string>
+    <string name="lbl_gallery_name">Gallery directory name</string>
+    <string name="lbl_btn_save">Save</string>
+    <string name="title_activity_provoking_thought_ques">ProvokingThoughtQuesActivity</string>
+
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam eget ligula eu lectus lobortis condimentum.</string>
+    //Time Picker
+    <string name="sett_reminder_header">Set Reminder</string>
+    <string name="sett_reminder_label">Remind Me</string>
+    <string name="sett_reminder_desc">We will remind you to make entiries of your expense</string>
+    <string name="sett_reminder_time_label">Set Reminder Time</string>
+    <string name="sett_reminder_time_content">08:34 AM</string>
+
+
+    //Font
+    <string name="custom_font">ZawgyiOne.ttf</string>
+
+    // Navigation Name
+    <string name="inspirational_story">စိတ္ခြန္အားျပည့္စာမ်ား</string>
+    <string name="love_story">ေမတၱာ</string>
+    <string name="positive_story">အေကာင္းျမင္</string>
+    <string name="famous_story">ေအာင္ျမင္သူမ်ားအေၾကာင္း</string>
+
+
+    <string name="quotes">အဆိုအမိန္႕မ်ား</string>
+    <string name="provoking_thought_que">စိတ္ဝင္းစားစရာအေမးအေျဖမ်ား</string>
+    <string name="your_favourite">မိမိႏွစ္သက္ရာမ်ား</string>
+    <string name="suggestion">အၾကံျပဳရန္</string>
+
+    <string name = "inspirational_quote">စိတ္ဓာတ္ခြန္႕အားျပည့္အဆိုအမိန္႕မ်ား</string>
+    <string name = "love_quote">ေမတၱာတရားအဆိုအမိန္႕မ်ား</string>
+    <string name = "positive_quote">အေကာင္းျမင္အဆိုအမိန္႕မ်ား</string>
+    <string name="stories">ပံုျပင္မ်ား</string>
+
+
+</resources>

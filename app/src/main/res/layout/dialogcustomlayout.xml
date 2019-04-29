@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+    <ImageView
+        android:src="@drawable/smile"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:scaleType="center"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/app_name" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="အၾကံဳျပဳစာရဖို႕ကြ်န္ေတာ္တို႕ေစာင့္ေျမာ္ေနပါတယ္"
+        android:background="@color/colorPrimary"
+        android:textAlignment="center"
+        />
+    
+    <EditText
+        android:id="@+id/feedback"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:hint="
+အၾကံဳျပဳစာရဖို႕ကြ်န္ေတာ္တို႕ေစာင့္ေျမာ္ေနပါတယ္!         " />
+    
+
+    
+</LinearLayout>

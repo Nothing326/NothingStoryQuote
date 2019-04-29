@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nothing.impossible.com.nothing">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- permission required to automatically restart a repeating alarm if the user reboots the device -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/story"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Activity.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.detailStory" />
+        <activity android:name=".Activity.FullScreenViewActivity" />
+        <activity
+            android:name=".Activity.ProvokingThoughtQuesActivity"
+            android:label="@string/title_activity_provoking_thought_ques"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.QuizActivity" />
+        <activity android:name=".Activity.StartQuizActivity" />
+        <activity android:name=".LuckyLifeQuesActivity" />
+        <activity android:name=".Activity.QuoteViewPagerActivity" />
+
+        <!-- Register the Alarm Receiver -->
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".Activity.quote_list_activity"></activity>
+    </application>
+
+</manifest>

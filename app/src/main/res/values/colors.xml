@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimaryDark">#ff7961</color>-->
+    <!--<color name="colorPrimary">#f44336</color>-->
+    <!--<color name="colorPrimary">#25baa2</color>-->
+    <!--<color name="colorPrimaryDark">#0e917c</color>-->
+    <color name="colorPrimary"> #009688</color>
+    <color name="colorPrimaryDark">#4DB6AC </color>
+
+
+    <color name="colorAccent">#89d0c2</color>
+    #BDBDBD
+
+    <color name="viewBg">#f1f5f8</color>
+    <color name="album_title">#4c4c4c</color>
+
+    <color name="bgBottomNavigation">#009688</color>
+    <color name="white">#ffffffff</color>
+
+
+    <string-array name="colors">
+        <item>#ad7dcf</item>
+        <item>#fcba59</item>
+        <item>#24c6d5</item>
+        <item>#24c6d5</item>
+        <item>#57dd86</item>
+        <item>#795548</item>
+        <item>#B71C1C</item>
+        <item>#AFB42B</item>
+    </string-array>
+    <color name="list_item_title">#d7ddee</color>
+    <color name="list_background">#1a1b1d</color>
+    <color name="list_background_pressed">#131315</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+    <color name="black">#000000</color>
+    <color name="grid_bg">#000000</color>
+    <color name="grid_item_bg">#1a1b1d</color>
+    <color name="action_bar">#141416</color>
+    <color name="action_bar_title">#ffffff</color>
+    <color name="settings_label">#323232</color>
+
+    <!--switch color-->
+
+    <color name="thumb_active">#069ECF</color>
+    <color name="track_active">#66069ECF</color>
+
+    <color name="thumb_inactive">#A5A5A5</color>
+    <color name="track_inactive">#66A5A5A5</color>
+
+</resources>

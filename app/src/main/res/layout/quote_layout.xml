@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:elevation="8dp"
+        android:background="@android:color/white"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+           />
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:textSize="16dp"
+                android:textColor="#212121"
+                android:layout_toRightOf="@+id/circleImage"
+                android:layout_marginLeft="16dp"
+                />
+            <TextView
+                android:id="@+id/role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ford CEO "
+                android:layout_below="@+id/author"
+                android:textSize="16dp"
+                android:textColor="#212121"
+                android:layout_alignLeft="@+id/author"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+
+                />
+            <TextView
+                android:layout_marginTop="32dp"
+                android:id="@+id/quoteDetail"
+                android:layout_below="@+id/circleImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:drawablePadding="8dp"
+                android:layout_gravity="center_vertical|left"
+                android:gravity="left|right"
+                android:textColor="#212121"
+                android:layout_margin="5dp"
+
+                android:text="Myanmar"
+                android:lineSpacingMultiplier="1.2"
+
+                />
+            <TextView
+                android:layout_margin="5dp"
+                android:layout_below="@+id/quoteDetail"
+                android:id="@+id/quoteDetailEng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textColor="#212121"
+                android:drawablePadding="8dp"
+                android:layout_gravity="center_vertical|left"
+                android:gravity="left|right"
+                android:text="Whatever you are,be a good one."
+                android:lineSpacingMultiplier="1.2"
+                />
+            <TextView
+                android:layout_marginTop="64dp"
+                android:id="@+id/authorid"
+                android:layout_below="@+id/quoteDetailEng"
+                android:layout_alignLeft="@+id/quoteDetailEng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                android:text=""
+
+                />
+            <Button
+                android:id="@+id/share"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/btnshare"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/quoteDetailEng"
+                android:layout_margin="8dp"
+
+                />
+            <ToggleButton
+                android:id="@+id/ToggleButton"
+                android:layout_below="@+id/quoteDetailEng"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/staroff"
+                android:textOn=""
+                android:textOff=""
+                android:layout_alignParentLeft="true"
+
+                android:layout_margin="8dp"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

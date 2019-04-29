@@ -1,0 +1,23 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="32dp"
+    android:layout_width="32dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:id="@+id/favouriteOn"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/favon"
+        android:layout_gravity="center"
+
+        />
+    <ImageView
+        android:id="@+id/favouriteOff"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/favoff"
+        android:layout_gravity="center"
+        />
+
+</FrameLayout>

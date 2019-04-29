@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuFavourite"
+        app:actionLayout="@layout/favourite_icon"
+        android:orderInCategory="100"
+        android:title="Favourite"
+        app:showAsAction="always"
+
+        />
+    <item
+        android:id="@+id/menuShare"
+        android:icon="@drawable/share"
+        android:orderInCategory="100"
+        android:title="Share"
+        app:showAsAction="always"
+
+        />
+</menu>

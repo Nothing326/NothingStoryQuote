@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--android:icon="@drawable/ic_drawer_home"-->
+    <group android:checkableBehavior="single">
+
+        <item
+            android:icon="@drawable/inspire"
+            android:id="@+id/nav_inspire"
+            android:title="@string/inspirational_story" />
+        <item
+            android:icon="@drawable/heart"
+            android:id="@+id/nav_love"
+            android:title="@string/love_story" />
+        <item
+            android:icon="@drawable/smile"
+            android:id="@+id/nav_positive"
+            android:title="@string/positive_story" />
+        <item
+            android:icon="@drawable/success"
+            android:id="@+id/nav_StoryFamousPeople"
+            android:title="@string/famous_story" />
+        <item
+            android:icon="@drawable/quot"
+            android:id="@+id/nav_quote"
+            android:title="@string/quotes" />
+        <!--<item-->
+            <!--android:icon="@drawable/wallpaper"-->
+            <!--android:id="@+id/nav_wallpaper"-->
+            <!--android:title="နောက်ခံပုံရိပ်များ" />-->
+        <item
+            android:icon="@drawable/inspire"
+            android:id="@+id/nav_quesandans"
+            android:title="@string/provoking_thought_que" />
+        <item
+        android:id="@+id/nav_favourite"
+        android:icon="@drawable/staron"
+        android:title="@string/your_favourite" />
+
+
+    </group>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/feedback"
+                android:icon="@drawable/feedback"
+                android:title="@string/suggestion" />
+        </menu>
+    </item>
+
+
+</menu>
