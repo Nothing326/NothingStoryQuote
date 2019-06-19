@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -28,6 +29,7 @@ import nothing.impossible.com.nothing.Activity.QuoteViewPagerActivity;
 import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Quote;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.CircleTransform;
 
 
 /**
@@ -116,7 +118,7 @@ public class FavouriteFragmentQuote extends Fragment {
             Button btnshare;
             public Quote quote;
             Typeface typeface;
-            public de.hdodenhof.circleimageview.CircleImageView circleImageView;
+            public ImageView circleImageView;
             public MyViewHolder(final View itemView) {
                 super(itemView);
                 typeface= Typeface.createFromAsset(context.getAssets(),context.getString(R.string.custom_font));
@@ -125,13 +127,13 @@ public class FavouriteFragmentQuote extends Fragment {
                 author=(TextView)itemView.findViewById(R.id.author);
                 btnshare=(Button)itemView.findViewById(R.id.share);
                 role=(TextView)itemView.findViewById(R.id.role);
-                circleImageView = (de.hdodenhof.circleimageview.CircleImageView)itemView.findViewById(R.id.circleImage);
+                circleImageView = (ImageView)itemView.findViewById(R.id.circleImage);
                 detail.setTypeface(typeface);
                 author.setTypeface(typeface);
                 role.setTypeface(typeface);
                 favorite = (ToggleButton) itemView.findViewById(R.id.ToggleButton);
                 favorite.setChecked(false);
-                favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.starred));
+                favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                 favorite.setOnClickListener(new View.OnClickListener(){
 
                     @Override
@@ -152,7 +154,7 @@ public class FavouriteFragmentQuote extends Fragment {
                         Intent shareIntent=new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT, Html.fromHtml("Quote")).toString();
-                        shareIntent.putExtra(Intent.EXTRA_TEXT,(Html.fromHtml(""+quote.getDetail())+"\n"+quote.getAuthor()+""));
+                        shareIntent.putExtra(Intent.EXTRA_TEXT,(Html.fromHtml(""+quote.getDetail())+"\n"+quote.getDetailEng()+"\n"+quote.getAuthor()));
                         context.startActivity(Intent.createChooser(shareIntent,"Share Quotes"));
                     }
                 });
@@ -247,6 +249,7 @@ public class FavouriteFragmentQuote extends Fragment {
                         .centerCrop()
                         .thumbnail(0.5f)
                         .crossFade()
+                        .bitmapTransform(new CircleTransform(context))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(circleImageView);
 

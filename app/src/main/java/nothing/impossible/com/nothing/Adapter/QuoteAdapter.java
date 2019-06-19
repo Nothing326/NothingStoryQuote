@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -30,6 +31,7 @@ import nothing.impossible.com.nothing.Activity.QuoteViewPagerActivity;
 import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Quote;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.CircleTransform;
 
 /**
  * Created by User on 4/24/18.
@@ -65,7 +67,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
         public ToggleButton favorite;
         public Quote quote;
         public CardView cardViewQuote;
-        public de.hdodenhof.circleimageview.CircleImageView circleImageView;
+        public ImageView circleImageView;
         Typeface typeface;
 
         public MyViewHolder(final View itemView) {
@@ -76,7 +78,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
             detailEng= (TextView) itemView.findViewById(R.id.quoteDetailEng);
             author=(TextView)itemView.findViewById(R.id.author);
             role=(TextView)itemView.findViewById(R.id.role);
-            circleImageView = (de.hdodenhof.circleimageview.CircleImageView)itemView.findViewById(R.id.circleImage);
+            circleImageView = (ImageView)itemView.findViewById(R.id.circleImage);
             //TypeFace
             detail.setTypeface(typeface);
             detailEng.setTypeface(typeface);
@@ -96,12 +98,13 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
             author.setText(quote.getAuthor());
             role.setText(quote.getRole());
 
-                        Glide.with(context).load(quote.getImage())
+                    Glide.with(context).load(quote.getImage())
                     .override(100,100)
                     .centerCrop()
                     .thumbnail(0.5f)
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .bitmapTransform(new CircleTransform(context))
                     .into(circleImageView);
             btnShare.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,7 +112,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
                     Intent shareIntent=new Intent(Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT,Html.fromHtml("Quote")).toString();
-                    shareIntent.putExtra(Intent.EXTRA_TEXT,(Html.fromHtml(""+quote.getDetail())+"\n"+quote.getAuthor()+""));
+                    shareIntent.putExtra(Intent.EXTRA_TEXT,(Html.fromHtml(""+quote.getDetail())+"\n"+quote.getDetailEng()+"\n"+quote.getAuthor()));
                     context.startActivity(Intent.createChooser(shareIntent,"Share Quotes"));
                 }
             });
@@ -158,7 +161,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
 
                     }//end for loop
                     if(body.equals(quote.getId())){
-                        favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.starred));
+                        favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                         favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -170,7 +173,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
 
                                 } else {
 
-                                    favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.starred));
+                                    favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                                     dbHelper.insertQuote(quote.getId(),quote.getDetail(),quote.getDetailEng(),quote.getAuthor(),quote.getImage(),quote.getRole(), context);
 //                        Toast.makeText(context,"You add"+ Html.fromHtml(story.getTitle())+" to Favourite",Toast.LENGTH_SHORT).show();
 
@@ -188,7 +191,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                                 if (isChecked) {
-                                    favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.starred));
+                                    favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                                     dbHelper.insertQuote(quote.getId(),quote.getDetail(),quote.getDetailEng(), quote.getAuthor(),quote.getImage(),quote.getRole(), context);
 
 

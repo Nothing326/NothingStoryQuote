@@ -20,13 +20,23 @@
         android:layout_below="@+id/cardViewPager"
         android:layout_centerHorizontal="true"
         android:id="@+id/relativeLayout">
-        <de.hdodenhof.circleimageview.CircleImageView
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/circleImage"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:src="@drawable/circleimage"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_margin="8dp"-->
+            <!--/>-->
+        <ImageView
             android:id="@+id/circleImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
             android:src="@drawable/circleimage"
             android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
             />
         <TextView
             android:id="@+id/tvAuthorViewPager"

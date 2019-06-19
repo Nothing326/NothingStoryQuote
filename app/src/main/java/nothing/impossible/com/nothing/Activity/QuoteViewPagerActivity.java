@@ -30,6 +30,7 @@ import java.util.List;
 import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Quote;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.CircleTransform;
 
 public class QuoteViewPagerActivity extends AppCompatActivity {
     private ViewPagerAdapter  viewPagerAdapter;
@@ -133,7 +134,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
             TextView tvQuote = (TextView) view.findViewById(R.id.tvQuoteViewPager);
             TextView tvQuoteEng = (TextView) view.findViewById(R.id.tvQuoteViewPagerEng);
             TextView tvRole = (TextView) view.findViewById(R.id.tvRole);
-            de.hdodenhof.circleimageview.CircleImageView image = ( de.hdodenhof.circleimageview.CircleImageView)
+            ImageView image = (ImageView)
                        view.findViewById(R.id.circleImage);
             tvQuote.setText(quoteList.get(position).getDetail());
             tvQuoteEng.setText(quoteList.get(position).getDetailEng());
@@ -152,6 +153,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
                     .centerCrop()
                     .thumbnail(0.5f)
                     .crossFade()
+                    .bitmapTransform(new CircleTransform(context))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(image);
            final ToggleButton favorite = (ToggleButton)view.findViewById(R.id.ToggleButton);
@@ -162,7 +164,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
                     Intent shareIntent=new Intent(Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, Html.fromHtml("Quote")).toString();
-                    shareIntent.putExtra(Intent.EXTRA_TEXT,(Html.fromHtml(""+quoteList.get(position).getDetail())+"\n"+quoteList.get(position).getAuthor()+""));
+                    shareIntent.putExtra(Intent.EXTRA_TEXT,(Html.fromHtml(""+quoteList.get(position).getDetail())+"\n"+quoteList.get(position).getDetailEng()+"\n"+quoteList.get(position).getAuthor()));
                     context.startActivity(Intent.createChooser(shareIntent,"Share Quotes"));
 
                 }
@@ -176,7 +178,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
 
             }//end for loop
             if(body.equals(quoteList.get(position).getDetail())){
-                favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.starred));
+                favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                 favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -189,7 +191,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
 
                         } else {
 
-                            favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.starred));
+                            favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                             dbHelper.insertQuote(quoteList.get(position).getId(),quoteList.get(position).getDetail()
                                     ,quoteList.get(position).getDetailEng(), quoteList.get(position).getAuthor()
                                     , quoteList.get(position).getImage(), quoteList.get(position).getRole() , context);
@@ -211,7 +213,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
                         if (isChecked) {
 //                        favorite.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.starred));
 //                        favorite.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.starred));
-                            favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.starred));
+                            favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                             dbHelper.insertQuote(quoteList.get(position).getId(),quoteList.get(position).getDetail()
                                     ,quoteList.get(position).getDetailEng(), quoteList.get(position).getAuthor()
                                     , quoteList.get(position).getImage(), quoteList.get(position).getRole() , context);

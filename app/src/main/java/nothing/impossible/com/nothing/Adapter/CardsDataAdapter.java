@@ -22,7 +22,8 @@ public class CardsDataAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, final View contentView, ViewGroup parent){
         TextView v = (TextView)(contentView.findViewById(R.id.content));
-        typeface= Typeface.createFromAsset(getContext().getAssets(), "ZawgyiOne.ttf");
+
+        typeface= Typeface.createFromAsset(getContext().getAssets(), "Myanmar3.ttf");
 
         v.setText(getItem(position));
         v.setTypeface(typeface);

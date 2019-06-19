@@ -1,7 +1,11 @@
 package nothing.impossible.com.nothing.Activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -10,6 +14,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -19,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +32,9 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
 
@@ -38,22 +47,50 @@ import nothing.impossible.com.nothing.Fragment.ProvokingThoughtQuesFragment;
 import nothing.impossible.com.nothing.Fragment.TypicalFragment;
 import nothing.impossible.com.nothing.Fragment.quote_category_fragment;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.app.Config;
+import nothing.impossible.com.nothing.util.NotificationUtils;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    Toolbar toolbar;
-    Databasehelper myDbHelper = new Databasehelper(this);
-    AlertDialog dialog;
-    Typeface typeface;
+    private Toolbar toolbar;
+    private Databasehelper myDbHelper = new Databasehelper(this);
+    private AlertDialog dialog;
+    private Typeface typeface;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Calligrapher calligrapher=new Calligrapher(this);
         calligrapher.setFont(this,getString(R.string.custom_font),true);
+        //Firebase Notification
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // gcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+                    displayFirebaseRegId();
+
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+
+                    String message = intent.getStringExtra("message");
+
+                    Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+                   // txtMessage.setText(message);
+                }
+            }
+        };
+
+        displayFirebaseRegId();
         try {
             myDbHelper.createDatabase();
            // Toast.makeText(MainActivity.this, "Successfull datanase", Toast.LENGTH_SHORT).show();
@@ -84,6 +121,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         displayView(R.id.nav_inspire);
          CheckConnection.CheckConnection(this);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationUtils.clearNotifications(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
+//     Fetches reg id from shared preferences
+//     and displays on the screen
+    private void displayFirebaseRegId() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+      //  Log.e(TAG, "Firebase reg id: " + regId);
+
+        if (!TextUtils.isEmpty(regId))
+
+            Toast.makeText(this,regId+"",Toast.LENGTH_LONG).show();
+        else
+
+        Toast.makeText(this,"Firebase Reg Id is not received yet!",Toast.LENGTH_LONG).show();
 
     }
     private void setupToolbar() {

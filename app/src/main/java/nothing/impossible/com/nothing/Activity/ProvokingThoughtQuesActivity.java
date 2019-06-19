@@ -32,7 +32,7 @@ public class ProvokingThoughtQuesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.close);
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-        typeface = Typeface.createFromAsset(getAssets(), "ZawgyiOne.ttf");
+        typeface = Typeface.createFromAsset(getAssets(), "Myanmar3.ttf");
         mTitle.setTypeface(typeface);
         mTitle.setText("စိတ္ဓာတ္ျမင့္္တင္ေရးစာမ်ား");
         getSupportActionBar().setTitle("");

@@ -153,13 +153,7 @@ public class detailStory extends AppCompatActivity {
 
                     dbHelper.insertStory(array[0], array[1], array[2],
                             array[3],array[4],array[5],Integer.parseInt(array[6]),this);
-
-
-
-
                 }
-
-
                 return true;
             }
             case R.id.menuShare: {
@@ -167,7 +161,7 @@ public class detailStory extends AppCompatActivity {
                 shareIntent.setType("text/plain");
                 String shareBody = "Here is the share content body";
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, Html.fromHtml(array[0]).toString());
-                shareIntent.putExtra(Intent.EXTRA_TEXT, (Html.fromHtml(array[1]).toString()));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, ""+array[1]+"\n"+array[2]+"\n"+array[3]+"\n"+array[4]+"");
                 startActivity(Intent.createChooser(shareIntent, "Share Stories"));
             }
             break;
