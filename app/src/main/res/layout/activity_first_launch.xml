@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+   <TextView
+       android:layout_marginTop="?attr/actionBarSize"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Choose Font"
+       android:textSize="16dp"
+       android:layout_centerHorizontal="true"
+       />
+
+   <RelativeLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerInParent="true"
+       android:id="@+id/layout_radio_group"
+       >
+
+
+       <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+           android:id="@+id/radioGroup"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+           android:layout_margin="8dp"
+           android:orientation="vertical">
+           <RadioButton android:id="@+id/radio_zawGyi"
+               android:buttonTint="@color/black"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="သီဟိုဠ္မွ ဉာဏ္ႀကီးရွင္သည္ အာယုဝဍ္ဎနေဆးၫႊန္းစာကို ဇလြန္ေဈးေဘးဗာဒံပင္ထက္ အဓိ႒ာန္လ်က္ ဂဃနဏဖတ္ခဲ့သည္။"
+               android:onClick="onRadioButtonClicked"/>
+           <RadioButton android:id="@+id/radio_unicode"
+               android:buttonTint="@color/black"
+               android:layout_marginTop="32dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="သီဟိုဠ်မှ ဉာဏ်ကြီးရှင်သည် အာယုဝဍ်ဎနဆေးညွှန်းစာကို ဇလွန်ဈေးဘေးဗာဒံပင်ထက် အဓိဋ္ဌာန်လျက် ဂဃနဏဖတ်ခဲ့သည်။"
+               android:onClick="onRadioButtonClicked"/>
+       </RadioGroup>
+
+
+   </RelativeLayout>
+    <TextView
+        android:layout_below="@+id/layout_radio_group"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="24dp"
+        android:layout_margin="8dp"
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        />
+
+
+
+</RelativeLayout>
