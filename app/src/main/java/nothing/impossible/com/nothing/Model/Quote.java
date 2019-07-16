@@ -8,15 +8,9 @@ public class Quote {
     String detail;
     String author;
     String image;
-    String role;
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+
 
     public String getImage() {
         return image;
@@ -48,13 +42,12 @@ public class Quote {
     public   Quote(){
 
     }
-  public  Quote(String id,String detail,String detailEng,String author,String image,String role){
+  public  Quote(String id,String detail,String detailEng,String author,String image){
         this.id = id;
         this.detailEng = detailEng;
         this.detail=detail;
         this.author=author;
         this.image = image;
-        this.role = role;
     }
     public String getAuthor() {
         return author;

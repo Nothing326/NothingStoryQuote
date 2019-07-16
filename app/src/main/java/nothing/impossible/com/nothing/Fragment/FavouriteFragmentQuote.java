@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -30,6 +29,7 @@ import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Quote;
 import nothing.impossible.com.nothing.R;
 import nothing.impossible.com.nothing.util.CircleTransform;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 
 /**
@@ -91,8 +91,6 @@ public class FavouriteFragmentQuote extends Fragment {
             quote.setDetailEng(quote.getDetailEng());
             quote.setAuthor(quote.getAuthor());
             quote.setImage(quote.getImage());
-            quote.setRole(quote.getRole());
-
             quoteList.add(quote);
         }
        adapter.notifyDataSetChanged();
@@ -113,24 +111,18 @@ public class FavouriteFragmentQuote extends Fragment {
             notifyDataSetChanged();
         }
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            public TextView detail,author,role,detailEng;
+            public TextView detail,author,detailEng;
             ToggleButton favorite;
             Button btnshare;
             public Quote quote;
-            Typeface typeface;
             public ImageView circleImageView;
             public MyViewHolder(final View itemView) {
                 super(itemView);
-                typeface= Typeface.createFromAsset(context.getAssets(),context.getString(R.string.custom_font));
                 detail= (TextView) itemView.findViewById(R.id.quoteDetail);
                 detailEng= (TextView) itemView.findViewById(R.id.quoteDetailEng);
                 author=(TextView)itemView.findViewById(R.id.author);
                 btnshare=(Button)itemView.findViewById(R.id.share);
-                role=(TextView)itemView.findViewById(R.id.role);
                 circleImageView = (ImageView)itemView.findViewById(R.id.circleImage);
-                detail.setTypeface(typeface);
-                author.setTypeface(typeface);
-                role.setTypeface(typeface);
                 favorite = (ToggleButton) itemView.findViewById(R.id.ToggleButton);
                 favorite.setChecked(false);
                 favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
@@ -180,7 +172,7 @@ public class FavouriteFragmentQuote extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        Quote quote1 = new Quote(quote.getId(),quote.getDetail(),quote.getDetailEng(),quote.getAuthor(),quote.getImage(),quote.getRole());
+                        Quote quote1 = new Quote(quote.getId(),quote.getDetail(),quote.getDetailEng(),quote.getAuthor(),quote.getImage());
 //                   Collections.shuffle(quoteList);
                         quoteList.remove(getPosition());
                         quoteList.add(0,quote1);
@@ -218,7 +210,7 @@ public class FavouriteFragmentQuote extends Fragment {
                                 arrayAuthor[i]=quoteList.get(i).getAuthor();
                                 EngQuotes[i] = quoteList.get(i).getDetailEng();
                                 arrayImage[i] = quoteList.get(i).getImage();
-                                arrayRole[i] = quoteList.get(i).getRole();
+
                             }
                             Intent intent = new Intent(context,QuoteViewPagerActivity.class);
                             Bundle b = new Bundle();
@@ -239,10 +231,9 @@ public class FavouriteFragmentQuote extends Fragment {
             public void bindData(final Quote quote) {
 
                 this.quote = quote;
-                detail.setText(quote.getDetail());
+                detail.setText(FontChecker.ChoosedFontText(quote.getDetail(),context));
                 detailEng.setText(quote.getDetailEng());
-                author.setText(quote.getAuthor());
-                role.setText(quote.getRole());
+                author.setText(FontChecker.ChoosedFontText(quote.getAuthor(),context));
 
                 Glide.with(context).load(quote.getImage())
                         .override(100,100)

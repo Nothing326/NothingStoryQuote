@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -32,6 +31,7 @@ import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Quote;
 import nothing.impossible.com.nothing.R;
 import nothing.impossible.com.nothing.util.CircleTransform;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 /**
  * Created by User on 4/24/18.
@@ -43,7 +43,6 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
     Databasehelper dbHelper = new Databasehelper(context);
     private String[] Colors;
     Button btnShare;
-    Typeface typeface;
     private String quote_cat_title ;
     private Handler mainHandler = new Handler();
 //    private final String FONT = context.getString(R.string.custom_font);
@@ -63,27 +62,19 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView detail,author,detailEng,role;
+        public TextView detail,author,detailEng;
         public ToggleButton favorite;
         public Quote quote;
         public CardView cardViewQuote;
         public ImageView circleImageView;
-        Typeface typeface;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
-            typeface= Typeface.createFromAsset(context.getAssets(), context.getString(R.string.custom_font));
 
             detail= (TextView) itemView.findViewById(R.id.quoteDetail);
             detailEng= (TextView) itemView.findViewById(R.id.quoteDetailEng);
             author=(TextView)itemView.findViewById(R.id.author);
-            role=(TextView)itemView.findViewById(R.id.role);
             circleImageView = (ImageView)itemView.findViewById(R.id.circleImage);
-            //TypeFace
-            detail.setTypeface(typeface);
-            detailEng.setTypeface(typeface);
-            author.setTypeface(typeface);
-            role.setTypeface(typeface);
             favorite=(ToggleButton)itemView.findViewById(R.id.ToggleButton);
             cardViewQuote=(CardView)itemView.findViewById(R.id.card_view);
             btnShare=(Button)itemView.findViewById(R.id.share);
@@ -93,10 +84,9 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
         public void bindData(final Quote quote) {
             this.quote = quote;
 
-            detail.setText(quote.getDetail());
+            detail.setText(FontChecker.ChoosedFontText(quote.getDetail(),context));
             detailEng.setText(quote.getDetailEng());
-            author.setText(quote.getAuthor());
-            role.setText(quote.getRole());
+            author.setText(FontChecker.ChoosedFontText("- "+quote.getAuthor(),context));
 
                     Glide.with(context).load(quote.getImage())
                     .override(100,100)
@@ -123,7 +113,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
                @Override
                public void onClick(View v) {
 
-                 Quote quote1 = new Quote(quote.getId(),quote.getDetail(),quote.getDetailEng(),quote.getAuthor(),quote.getImage(),quote.getRole());
+                 Quote quote1 = new Quote(quote.getId(),quote.getDetail(),quote.getDetailEng(),quote.getAuthor(),quote.getImage());
 //                   Collections.shuffle(quoteList);
                    quoteList.remove(getPosition());
                   quoteList.add(0,quote1);
@@ -174,7 +164,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
                                 } else {
 
                                     favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
-                                    dbHelper.insertQuote(quote.getId(),quote.getDetail(),quote.getDetailEng(),quote.getAuthor(),quote.getImage(),quote.getRole(), context);
+                                    dbHelper.insertQuote(quote.getId(),quote.getDetail(),quote.getDetailEng(),quote.getAuthor(),quote.getImage(), context);
 //                        Toast.makeText(context,"You add"+ Html.fromHtml(story.getTitle())+" to Favourite",Toast.LENGTH_SHORT).show();
 
                                 }
@@ -192,7 +182,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
 
                                 if (isChecked) {
                                     favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
-                                    dbHelper.insertQuote(quote.getId(),quote.getDetail(),quote.getDetailEng(), quote.getAuthor(),quote.getImage(),quote.getRole(), context);
+                                    dbHelper.insertQuote(quote.getId(),quote.getDetail(),quote.getDetailEng(), quote.getAuthor(),quote.getImage(), context);
 
 
 
@@ -237,7 +227,6 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
                         arrayAuthor[i]=quoteList.get(i).getAuthor();
                         EngQuotes[i] = quoteList.get(i).getDetailEng();
                         arrayImage[i] = quoteList.get(i).getImage();
-                        arrayRole[i] = quoteList.get(i).getRole();
                     }
                     Intent intent = new Intent(context,QuoteViewPagerActivity.class);
                     Bundle b = new Bundle();
@@ -246,7 +235,6 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
                     b.putStringArray("keyEngQuote",EngQuotes);
                     b.putStringArray("keyAuthor",arrayAuthor);
                     b.putStringArray("keyImage",arrayImage);
-                    b.putStringArray("keyRole",arrayRole);
                     b.putString("key_quote_cat_title",quote_cat_title);
                     intent.putExtras(b);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );

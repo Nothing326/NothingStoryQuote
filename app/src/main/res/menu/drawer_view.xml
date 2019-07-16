@@ -36,14 +36,19 @@
         android:icon="@drawable/staron"
         android:title="@string/your_favourite" />
 
-
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/settings"
+            android:title="@string/settings"/>
     </group>
     <item android:title="">
         <menu>
+
             <item
                 android:id="@+id/feedback"
                 android:icon="@drawable/feedback"
                 android:title="@string/suggestion" />
+
         </menu>
     </item>
 

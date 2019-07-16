@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -31,6 +30,7 @@ import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Quote;
 import nothing.impossible.com.nothing.R;
 import nothing.impossible.com.nothing.util.CircleTransform;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 public class QuoteViewPagerActivity extends AppCompatActivity {
     private ViewPagerAdapter  viewPagerAdapter;
@@ -41,14 +41,11 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
     private String EngQuotes[];
     private String ids[];
     private String arrayImage[];
-    private String arrayRole[];
     private Quote quote;
-    private Typeface typeface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quote_view_pager);
-        typeface= Typeface.createFromAsset(getAssets(),getString(R.string.custom_font));
 
         //Tool Bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,7 +56,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         TextView txtTitle =(TextView)toolbar. findViewById(R.id.toolbarTitle);
-        txtTitle.setTypeface(typeface);
+
         viewPager =(ViewPager)findViewById(R.id.viewPagerSlide);
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         quoteArrayList = new ArrayList<Quote>();
@@ -69,10 +66,10 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
         EngQuotes = b.getStringArray("keyEngQuote");
         arrayAuthor = b.getStringArray("keyAuthor");
         arrayImage = b.getStringArray("keyImage");
-        arrayRole = b.getStringArray("keyRole");
-        txtTitle.setText(b.getString("key_quote_cat_title"));
+
+        txtTitle.setText(FontChecker.ChoosedFontText(b.getString("key_quote_cat_title"),this));
         for(int i=0;i<array.length;i++){
-            quoteArrayList.add(i,new Quote(ids[i],array[i],EngQuotes[i],arrayAuthor[i],arrayImage[i],arrayRole[i]));
+            quoteArrayList.add(i,new Quote(ids[i],array[i],EngQuotes[i],arrayAuthor[i],arrayImage[i]));
         }
 
         viewPagerAdapter = new ViewPagerAdapter(quoteArrayList,this);
@@ -104,14 +101,12 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
         private SparseBooleanArray itemStateArray= new SparseBooleanArray();
         private List<Quote> quoteList;
         private Context context;
-        Typeface typeface;
         Databasehelper dbHelper ;
 //        ToggleButton favorite; Sometimes,Problems make me happy.
         ImageView imageView;
         ViewPagerAdapter(List<Quote> quoteList,Context context){
             this.quoteList=quoteList;
             this.context=context;
-            typeface= Typeface.createFromAsset(context.getAssets(),context.getString(R.string.custom_font));
             dbHelper = new Databasehelper(context);
 
         }
@@ -133,17 +128,12 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
             view.setSaveEnabled(true);
             TextView tvQuote = (TextView) view.findViewById(R.id.tvQuoteViewPager);
             TextView tvQuoteEng = (TextView) view.findViewById(R.id.tvQuoteViewPagerEng);
-            TextView tvRole = (TextView) view.findViewById(R.id.tvRole);
             ImageView image = (ImageView)
                        view.findViewById(R.id.circleImage);
-            tvQuote.setText(quoteList.get(position).getDetail());
+            tvQuote.setText(FontChecker.ChoosedFontText(quoteList.get(position).getDetail(),context));
             tvQuoteEng.setText(quoteList.get(position).getDetailEng());
-            tvQuote.setTypeface(typeface);
             final TextView tvAuthor = (TextView) view.findViewById(R.id.tvAuthorViewPager);
-            tvAuthor.setText(quoteList.get(position).getAuthor());
-            tvAuthor.setTypeface(typeface);
-            tvRole.setText(quoteList.get(position).getRole());
-            tvRole.setTypeface(typeface);
+            tvAuthor.setText(FontChecker.ChoosedFontText(quoteList.get(position).getAuthor(),context));
 
 
 
@@ -194,7 +184,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
                             favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                             dbHelper.insertQuote(quoteList.get(position).getId(),quoteList.get(position).getDetail()
                                     ,quoteList.get(position).getDetailEng(), quoteList.get(position).getAuthor()
-                                    , quoteList.get(position).getImage(), quoteList.get(position).getRole() , context);
+                                    , quoteList.get(position).getImage(), context);
 //                        Toast.makeText(context,"You add"+ Html.fromHtml(story.getTitle())+" to Favourite",Toast.LENGTH_SHORT).show();
 
                         }
@@ -216,7 +206,7 @@ public class QuoteViewPagerActivity extends AppCompatActivity {
                             favorite.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.staron));
                             dbHelper.insertQuote(quoteList.get(position).getId(),quoteList.get(position).getDetail()
                                     ,quoteList.get(position).getDetailEng(), quoteList.get(position).getAuthor()
-                                    , quoteList.get(position).getImage(), quoteList.get(position).getRole() , context);
+                                    , quoteList.get(position).getImage(), context);
 
 
                         } else {

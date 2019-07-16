@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import nothing.impossible.com.nothing.Activity.quote_list_activity;
 import nothing.impossible.com.nothing.Model.Category;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 /**
  * Created by User on 4/24/18.
@@ -24,7 +24,6 @@ import nothing.impossible.com.nothing.R;
 public class quote_category_adapter extends RecyclerView.Adapter<quote_category_adapter.MyViewHolder>  {
     private Context context;
     private ArrayList<Category> catList;
-    Typeface typeface;
     private Handler mainHandler = new Handler();
     public quote_category_adapter(Context context, ArrayList<Category> catList) {
         this.context = context;
@@ -37,22 +36,20 @@ public class quote_category_adapter extends RecyclerView.Adapter<quote_category_
         public ImageView image;
         public Category category;
 
-        public Typeface typeface;
-
         public MyViewHolder(final View itemView) {
             super(itemView);
-            typeface= Typeface.createFromAsset(context.getAssets(), context.getString(R.string.custom_font));
+
 
             name= (TextView) itemView.findViewById(R.id.catName);
             image= (ImageView) itemView.findViewById(R.id.thumbnail);
-            name.setTypeface(typeface);
+
 
         }
 
         public void bindData(final Category category) {
             this.category = category;
 
-            name.setText(category.getName());
+            name.setText(FontChecker.ChoosedFontText(category.getName(),context));
             image.setImageResource(category.getImage());
 
 

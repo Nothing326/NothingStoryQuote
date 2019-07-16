@@ -17,6 +17,7 @@ public class LocalData {
     private static final String reminderStatus="reminderStatus";
     private static final String hour="hour";
     private static final String min="min";
+    public static final boolean  DEFAULT = false;
 
     public LocalData(Context context)
     {
@@ -68,6 +69,28 @@ public class LocalData {
         prefsEditor.clear();
         prefsEditor.commit();
 
+    }
+
+    public void SetFont(boolean isZawGyi){
+
+        prefsEditor.putBoolean("Font",isZawGyi);
+        prefsEditor.commit();
+
+    }
+    public  boolean isZawGyi(){
+
+        return   appSharedPrefs.getBoolean("Font",DEFAULT);
+    }
+
+    public void SetFirstTime(boolean isFirstTime){
+
+        prefsEditor.putBoolean("FirstTime",isFirstTime);
+        prefsEditor.commit();
+    }
+
+    public boolean isFirstTime(){
+
+        return   appSharedPrefs.getBoolean("FirstTime",DEFAULT);
     }
 
 }

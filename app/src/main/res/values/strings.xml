@@ -45,7 +45,7 @@
 
 
     //Font
-    <string name="custom_font">ZawgyiOne.ttf</string>
+    <string name="custom_font">Myanmar3.ttf</string>
 
     // Navigation Name
     <string name="inspirational_story">စိတ္ခြန္အားျပည့္စာမ်ား</string>
@@ -59,10 +59,11 @@
     <string name="your_favourite">မိမိႏွစ္သက္ရာမ်ား</string>
     <string name="suggestion">အၾကံျပဳရန္</string>
 
-    <string name = "inspirational_quote">စိတ္ဓာတ္ခြန္႕အားျပည့္အဆိုအမိန္႕မ်ား</string>
-    <string name = "love_quote">ေမတၱာတရားအဆိုအမိန္႕မ်ား</string>
-    <string name = "positive_quote">အေကာင္းျမင္အဆိုအမိန္႕မ်ား</string>
+    <string name="inspirational_quote">စိတ္ဓာတ္ခြန္႕အားျပည့္အဆိုအမိန္႕မ်ား</string>
+    <string name="love_quote">ေမတၱာတရားအဆိုအမိန္႕မ်ား</string>
+    <string name="positive_quote">အေကာင္းျမင္အဆိုအမိန္႕မ်ား</string>
     <string name="stories">ပံုျပင္မ်ား</string>
+    <string name="settings">အျပင္အဆင္</string>
 
 
 </resources>

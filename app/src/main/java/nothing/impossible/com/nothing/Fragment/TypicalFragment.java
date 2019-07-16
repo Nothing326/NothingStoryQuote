@@ -28,6 +28,7 @@ import nothing.impossible.com.nothing.Adapter.MultiViewTypeAdapter;
 import nothing.impossible.com.nothing.CheckConnection;
 import nothing.impossible.com.nothing.Model.Story;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 
 /**
@@ -80,7 +81,7 @@ public class TypicalFragment extends Fragment implements SwipeRefreshLayout.OnRe
         );
         CheckConnection.CheckConnection(context);
         searchView=(MaterialSearchView)getActivity().findViewById(R.id.search_view);
-        searchView.setHint("ေခါင္းစဥ္ သို႕မဟုတ္ စာသားျဖင့္ရွာပါ");
+        searchView.setHint(FontChecker.ChoosedFontText("ေခါင္းစဥ္ သို႕မဟုတ္ စာသားျဖင့္ရွာပါ",context));
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener(){
 
             @Override
@@ -121,14 +122,14 @@ public class TypicalFragment extends Fragment implements SwipeRefreshLayout.OnRe
                         for (Story story : list) {
 
                             // here we are looking for author and context
-                            if (story.getTitle().toLowerCase().contains(newText.toLowerCase())
+                            if (story.getTitle().toLowerCase().contains(FontChecker.UnicodeToZawGyi(newText,context).toLowerCase())
 
                                     ||
-                                    story.getTitleEng().toLowerCase().contains(newText.toLowerCase())
+                                    story.getTitleEng().toLowerCase().contains(FontChecker.UnicodeToZawGyi(newText,context).toLowerCase())
                                     ||
-                                    story.getStoryDetailEng().toLowerCase().contains(newText.toLowerCase())
+                                    story.getStoryDetailEng().toLowerCase().contains(FontChecker.UnicodeToZawGyi(newText,context).toLowerCase())
                                     ||
-                                    story.getStoryDetail().toLowerCase().contains(newText.toLowerCase())
+                                    story.getStoryDetail().toLowerCase().contains(FontChecker.UnicodeToZawGyi(newText,context).toLowerCase())
 
                                     ) {
                                 filteredList.add(story);
@@ -144,8 +145,6 @@ public class TypicalFragment extends Fragment implements SwipeRefreshLayout.OnRe
                         recyclerAdapter = new MultiViewTypeAdapter(list,context);
                         recyclerView.setAdapter(recyclerAdapter);
                     }
-
-
                     return true;
 
                 } else {

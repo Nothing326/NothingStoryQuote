@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Activity;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -31,6 +30,7 @@ import nothing.impossible.com.nothing.Adapter.QuoteAdapter;
 import nothing.impossible.com.nothing.CheckConnection;
 import nothing.impossible.com.nothing.Model.Quote;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 public class quote_list_activity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView recyclerView;
@@ -43,14 +43,13 @@ public class quote_list_activity extends AppCompatActivity implements SwipeRefre
     private SwipeRefreshLayout swipeRefreshLayout;
     private String destination;
     private String quoteTitle;
-    private Typeface typeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quote_list_activity);
-
-        typeface= Typeface.createFromAsset(getAssets(),getString(R.string.custom_font));
+//        Calligrapher calligrapher=new Calligrapher(this);
+//        calligrapher.setFont(this,getString(R.string.custom_font),true);
         //Tool Bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -60,11 +59,10 @@ public class quote_list_activity extends AppCompatActivity implements SwipeRefre
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         TextView txtTitle =(TextView)toolbar. findViewById(R.id.toolbarTitle);
-        txtTitle.setTypeface(typeface);
         Bundle b = getIntent().getExtras();
         destination = b.getString("key");
         quoteTitle = b.getString("quote_title");
-        txtTitle.setText(quoteTitle);
+        txtTitle.setText(FontChecker.ChoosedFontText(quoteTitle,this));
         // Inflate the layout for this fragment
         recyclerView = (RecyclerView) findViewById(R.id.blog_list);
         recyclerView.setHasFixedSize(true);
@@ -125,6 +123,8 @@ public class quote_list_activity extends AppCompatActivity implements SwipeRefre
             }
         }
         searchView=(MaterialSearchView)findViewById(R.id.search_view);
+        searchView.setHint(FontChecker.ChoosedFontText("အမည္ သို႕မဟုတ္ စာသားျဖင့္ရွာပါ",this));
+
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener(){
 
             @Override
@@ -231,7 +231,6 @@ public boolean onOptionsItemSelected(MenuItem item) {
                     quote.setDetailEng(value.getDetailEng());
                     quote.setAuthor(author);
                     quote.setImage(value.getImage());
-                    quote.setRole(value.getRole());
 
                     ListFiltered.add(quote);
 

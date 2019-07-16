@@ -1,7 +1,6 @@
 package nothing.impossible.com.nothing.Activity;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,12 +20,12 @@ import java.util.List;
 import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Story;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 public class detailStory extends AppCompatActivity {
     String array[];
     TextView title, storyDetail,titleEng,storyDetailEng;
     ImageView imageView;
-    Typeface typeface;
     ImageView favouriteOn, favouriteOff;
     Databasehelper dbHelper = new Databasehelper(this);
 
@@ -48,14 +47,12 @@ public class detailStory extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
 //        appBarLayout.setExpanded(true);
-        typeface = Typeface.createFromAsset(getAssets(), getString(R.string.custom_font));
 
-        //Setting Cutom font in toolbar
+        //SettingFragment Cutom font in toolbar
         Bundle b = getIntent().getExtras();
         array = b.getStringArray("key");
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbarTitle);
-        mTitle.setTypeface(typeface);
-        mTitle.setText("စိတ္ဓာတ္ျမင့္္တင္ေရးစာမ်ား");
+        mTitle.setText(FontChecker.ChoosedFontText("စိတ္ဓာတ္ျမင့္္တင္ေရးစာမ်ား",this));
         getSupportActionBar().setTitle("");
 
 // Update the action bar title with the TypefaceSpan instance
@@ -66,9 +63,9 @@ public class detailStory extends AppCompatActivity {
         storyDetail = (TextView) findViewById(R.id.storyDetail);
         titleEng = (TextView) findViewById(R.id.storyTitleEng);
         storyDetailEng = (TextView) findViewById(R.id.storyDetailEng);
-        title.setText(array[1].toString());
-        titleEng.setText(array[2].toString());
-        storyDetail.setText(Html.fromHtml(array[3]));
+        title.setText(FontChecker.ChoosedFontText(array[1],this));
+        titleEng.setText(array[2]);
+        storyDetail.setText(FontChecker.ChoosedFontText(Html.fromHtml(array[3]).toString(),this));
         storyDetailEng.setText(array[4]);
         Glide.with(this).load(array[5])
                 .centerCrop()
@@ -77,8 +74,7 @@ public class detailStory extends AppCompatActivity {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
-        title.setTypeface(typeface);
-        storyDetail.setTypeface(typeface);
+
 
     }
 
@@ -170,6 +166,11 @@ public class detailStory extends AppCompatActivity {
 
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     public void updateFavouriteIcon() {

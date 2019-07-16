@@ -4,7 +4,9 @@ package nothing.impossible.com.nothing.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -122,6 +124,7 @@ public class QuotesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
         }
         searchView=(MaterialSearchView)getActivity().findViewById(R.id.search_view);
+        searchView.setHint("အမည္ သို႕မဟုတ္ စာသားျဖင့္ရွာပါ");
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener(){
 
             @Override
@@ -142,6 +145,7 @@ public class QuotesFragment extends Fragment implements SwipeRefreshLayout.OnRef
            //     recyclerAdapter.getFilter().filter(query);
                 return false;            }
 
+            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             @Override
             public boolean onQueryTextChange(String newText) {
                 // filter recycler view when text is changed
@@ -230,7 +234,6 @@ public class QuotesFragment extends Fragment implements SwipeRefreshLayout.OnRef
                     quote.setDetailEng(value.getDetailEng());
                     quote.setAuthor(author);
                     quote.setImage(value.getImage());
-                    quote.setRole(value.getRole());
 
                      quoteList.add(quote);
 

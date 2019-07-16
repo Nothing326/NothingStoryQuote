@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Fragment;
 
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 
 /**
@@ -42,13 +42,12 @@ public class FavouriteFragmentViewPager extends Fragment {
         setupViewPager(viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs1);
         tabLayout.setupWithViewPager(viewPager);
-        Typeface typeface=Typeface.createFromAsset(context.getAssets(), getString(R.string.custom_font));
+
         TextView tabOne=(TextView)LayoutInflater.from(context).inflate(R.layout.custom_tab,null);
-        tabOne.setText(getString(R.string.stories));
-        tabOne.setTypeface(typeface);
+        tabOne.setText(FontChecker.ChoosedFontText(getString(R.string.stories),context));
         TextView tabTwo=(TextView)LayoutInflater.from(context).inflate(R.layout.custom_tab,null);
-        tabTwo.setText(getString(R.string.quotes));
-        tabTwo.setTypeface(typeface);
+        tabTwo.setText(FontChecker.ChoosedFontText(getString(R.string.quotes),context));
+
         tabLayout.getTabAt(0).setCustomView(tabOne);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
         return  view;

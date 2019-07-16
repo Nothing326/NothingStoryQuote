@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -25,6 +23,7 @@ import nothing.impossible.com.nothing.Activity.detailStory;
 import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Story;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 
 /**
@@ -36,7 +35,6 @@ public class MultiViewTypeAdaptearForFavFrage extends RecyclerView.Adapter<Recyc
     private ArrayList<Story> ListFiltered;
     private Context mContext;
     private int total_types;
-    private Typeface typeface;
 
 
 
@@ -98,7 +96,7 @@ public class MultiViewTypeAdaptearForFavFrage extends RecyclerView.Adapter<Recyc
         this.mContext = context;
         total_types = dataSet.size();
         this.ListFiltered = data;
-        typeface=Typeface.createFromAsset(context.getAssets(), context.getString(R.string.custom_font));
+
 
     }
     Databasehelper dbHelper = new Databasehelper(mContext);
@@ -151,9 +149,9 @@ public class MultiViewTypeAdaptearForFavFrage extends RecyclerView.Adapter<Recyc
 //
 //                    break;
             case Story.IMAGE_TYPE: {
-                ((ImageTypeViewHolder) holder).txtTitle.setText(object.getTitle());
+                ((ImageTypeViewHolder) holder).txtTitle.setText(FontChecker.ChoosedFontText(object.getTitle(),mContext));
                 ((ImageTypeViewHolder) holder).txtTitleEng.setText(object.getTitleEng());
-                ((ImageTypeViewHolder) holder).txtTitle.setTypeface(typeface);
+
 //                ((ImageTypeViewHolder) holder).favourite.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.starred));
 //                ((ImageTypeViewHolder) holder).favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                    @Override
@@ -200,9 +198,9 @@ public class MultiViewTypeAdaptearForFavFrage extends RecyclerView.Adapter<Recyc
             }
             break;
             case Story.IMAGE_VERTICAL_TYPE: {
-                ((ImageVerticalTypeViewHolder) holder).txtTitle.setText(Html.fromHtml(object.getTitle()));
+                ((ImageVerticalTypeViewHolder) holder).txtTitle.setText(FontChecker.ChoosedFontText(object.getTitle(),mContext));
                 ((ImageVerticalTypeViewHolder) holder).txtTitleEng.setText(Html.fromHtml(object.getTitleEng()));
-                ((ImageVerticalTypeViewHolder) holder).txtTitle.setTypeface(typeface);
+
 //                ((ImageVerticalTypeViewHolder) holder).favourite.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.starred));
 //                ((ImageVerticalTypeViewHolder) holder).favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                    @Override

@@ -217,7 +217,6 @@ public List<Quote> getAllQuote(Context context) {
             quote.setAuthor(cursor.getString(2));
             quote.setDetailEng(cursor.getString(3));
             quote.setImage(cursor.getString(4));
-            quote.setRole(cursor.getString(5));
             // Adding Quote to list
             quoteList.add(quote);
         } while (cursor.moveToNext());
@@ -231,9 +230,9 @@ public List<Quote> getAllQuote(Context context) {
 }
 
 
-    public void insertQuote( String id,String detail,String detailEng,String author,String image,String role, Context context){
+    public void insertQuote( String id,String detail,String detailEng,String author,String image, Context context){
         String detailEng1 = detailEng.replaceAll("'","''");
-        String insertQuery ="insert into quotes(id,detail,author,detailEng,image,role) values('"+id+"','" +detail+ "','"+author+"','"+detailEng1+"','"+image+"','"+role+"')";
+        String insertQuery ="insert into quotes(id,detail,author,detailEng,image) values('"+id+"','" +detail+ "','"+author+"','"+detailEng1+"','"+image+"')";
         Databasehelper dbHelper = new Databasehelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.execSQL(insertQuery);

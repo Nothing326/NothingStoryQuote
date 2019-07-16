@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.SQLException;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -22,7 +21,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -38,9 +36,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
 
-import me.anwarshahriar.calligrapher.Calligrapher;
 import nothing.impossible.com.nothing.CheckConnection;
-import nothing.impossible.com.nothing.CustomTypefaceSpan;
 import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Fragment.FavouriteFragmentViewPager;
 import nothing.impossible.com.nothing.Fragment.ProvokingThoughtQuesFragment;
@@ -48,6 +44,7 @@ import nothing.impossible.com.nothing.Fragment.TypicalFragment;
 import nothing.impossible.com.nothing.Fragment.quote_category_fragment;
 import nothing.impossible.com.nothing.R;
 import nothing.impossible.com.nothing.app.Config;
+import nothing.impossible.com.nothing.util.FontChecker;
 import nothing.impossible.com.nothing.util.NotificationUtils;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,14 +55,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private Databasehelper myDbHelper = new Databasehelper(this);
     private AlertDialog dialog;
-    private Typeface typeface;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Calligrapher calligrapher=new Calligrapher(this);
-        calligrapher.setFont(this,getString(R.string.custom_font),true);
+//        Calligrapher calligrapher=new Calligrapher(this);
+//        calligrapher.setFont(this,getString(R.string.custom_font),true);
         //Firebase Notification
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -253,8 +249,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void displayView(int menuid) {
         TextView mTitle=(TextView)toolbar.findViewById(R.id.toolbarTitle);
-        typeface= Typeface.createFromAsset(getAssets(),getString(R.string.custom_font));
-        mTitle.setTypeface(typeface);
         Fragment fragment = null;
         String title = "";
         switch (menuid) {
@@ -280,15 +274,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 title = getString(R.string.quotes);
                 break;
-  /*          case R.id.nav_wallpaper:
-
-                fragment=new WallpaperFragment(this,"Wallpaper");
-//               fragment=new ViewPagerFragment();
-//                fragment=new BlankFragment();
-//                fragment =new QuoteViewPagerFragment(this,"Quotes");
-                title = "နောက်ခံပုံရိပ်များ";
-                break;
-                */
+//            case R.id.nav_wallpaper:
+//
+//                fragment=new WallpaperFragment(this,"Wallpaper");
+////               fragment=new ViewPagerFragment();
+////                fragment=new BlankFragment();
+////                fragment =new QuoteViewPagerFragment(this,"Quotes");
+//                title = "နောက်ခံပုံရိပ်များ";
+//                break;
             case R.id.nav_quesandans:
                // fragment = new CategoriesOfInterestFragment();
                 fragment = new ProvokingThoughtQuesFragment();
@@ -302,6 +295,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_favourite:
                 fragment = new FavouriteFragmentViewPager(this);
                 title = getString(R.string.your_favourite);
+                break;
+            case R.id.setting:
+//                fragment = new SettingFragment(this);
+                Intent intent = new Intent(MainActivity.this, Setting.class);
+                startActivity(intent);
+                title = getString(R.string.settings);
                 break;
             case R.id.feedback:
             {
@@ -346,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             // set the toolbar title
             getSupportActionBar().setTitle("");
-            mTitle.setText(title);
+            mTitle.setText(FontChecker.ChoosedFontText(title,this));
         }
     }
 
@@ -378,10 +377,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
     private void applyFontToMenuItem(MenuItem mi){
-        Typeface font= Typeface.createFromAsset(getAssets(),getString(R.string.custom_font));
+//        Typeface font= Typeface.createFromAsset(getAssets(),getString(R.string.custom_font));
         SpannableString mNewTitle=new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("",font),0,mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        mi.setTitle(mNewTitle);
+//        mNewTitle.setSpan(new CustomTypefaceSpan("",font),0,mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(FontChecker.ChoosedFontText(mNewTitle.toString(),this));
     }
 }

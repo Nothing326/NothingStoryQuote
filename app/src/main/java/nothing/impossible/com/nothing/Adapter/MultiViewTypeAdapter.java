@@ -2,7 +2,6 @@ package nothing.impossible.com.nothing.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -23,6 +22,7 @@ import nothing.impossible.com.nothing.Activity.detailStory;
 import nothing.impossible.com.nothing.Databasehelper;
 import nothing.impossible.com.nothing.Model.Story;
 import nothing.impossible.com.nothing.R;
+import nothing.impossible.com.nothing.util.FontChecker;
 
 
 /**
@@ -37,7 +37,6 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
 //    public  StoryAdapterListener listener;
     Context mContext;
     int total_types;
-    Typeface  typeface;
 
 //
 //    public static class TextTypeViewHolder extends RecyclerView.ViewHolder {
@@ -92,7 +91,6 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.mContext = context;
         total_types = dataSet.size();
         this.ListFiltered = data;
-          typeface=Typeface.createFromAsset(context.getAssets(), "ZawgyiOne.ttf");
 
     }
     Databasehelper dbHelper = new Databasehelper(mContext);
@@ -129,9 +127,9 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
 //
 //                    break;
             case Story.IMAGE_TYPE: {
-                ((ImageTypeViewHolder) holder).txtTitle.setText(Html.fromHtml(object.getTitle()));
+                ((ImageTypeViewHolder) holder).txtTitle.setText(FontChecker.ChoosedFontText(object.getTitle(),mContext));
+
                 ((ImageTypeViewHolder) holder).txtTitleEng.setText(Html.fromHtml(object.getTitleEng()));
-                ((ImageTypeViewHolder) holder).txtTitle.setTypeface(typeface);
 //                ((ImageTypeViewHolder) holder).favourite.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.staroff));
 //                String title1 = "";
 //
@@ -211,10 +209,9 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
             break;
             case Story.IMAGE_VERTICAL_TYPE: {
-                ((ImageVerticalTypeViewHolder) holder).txtTitle.setText(Html.fromHtml(object.getTitle()));
+                ((ImageVerticalTypeViewHolder) holder).txtTitle.setText(FontChecker.ChoosedFontText(object.getTitle(),mContext));
                 ((ImageVerticalTypeViewHolder) holder).txtTitleEng.setText(Html.fromHtml(object.getTitleEng()));
 
-                ((ImageVerticalTypeViewHolder) holder).txtTitle.setTypeface(typeface);
 //                ((ImageVerticalTypeViewHolder) holder).favourite.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.staroff));
 //                String title1 = "";
 //
